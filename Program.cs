@@ -1,6 +1,17 @@
+using Siemens.Internship2026.GradeBook.Interfaces;
+using Siemens.Internship2026.GradeBook.Repositories;
+using Siemens.Internship2026.GradeBook.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+
+builder.Services.AddHttpClient<IGradeRepository, GradeRepository>(client =>
+{
+    client.BaseAddress = new Uri("https://gist.githubusercontent.com/ArdeleanTudor/8ea407832cd9794960e0e6bbd1319f6e/raw");
+
+}); 
+builder.Services.AddScoped<IGradeService, GradeService>();
 
 var app = builder.Build();
 
